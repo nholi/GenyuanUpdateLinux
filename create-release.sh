@@ -1,11 +1,11 @@
 mkdir ./Release-Linux-x64
 dotnet publish --configuration Release ./HappyGenyuanImsactUpdate --output ./Release-Linux-x64/Updater
-cp "./HappyGenyuanImsactUpdate/bin/Release/net8.0/7zz" "./Release-Linux-x64/Updater/7zz"
-cp "./HappyGenyuanImsactUpdate/bin/Release/net8.0/hpatchz" "./Release-Linux-x64/Updater/hpatchz"
+cp "./HappyGenyuanImsactUpdate/bin/Release/net8.0/7zz" "./Release-Linux-x64/Updater/"
+cp "./HappyGenyuanImsactUpdate/bin/Release/net8.0/hpatchz" "./Release-Linux-x64/Updater/"
 
 dotnet publish --configuration Release ./HDiffPatchCreator --output "./Release-Linux-x64/Patch Creator"
-cp "./HDiffPatchCreator/bin/Release/net8.0/7zz" "./Release-Linux-x64/Patch Creator/7zz"
-cp "./HDiffPatchCreator/bin/Release/net8.0/hdiffz" "./Release-Linux-x64/Patch Creator/hdiffz"
-cp "./HDiffPatchCreator/bin/Release/net8.0/hpatchz" "./Release-Linux-x64/Patch Creator/hpatchz"
+cp "./HDiffPatchCreator/bin/Release/net8.0/7zz" "./Release-Linux-x64/Patch Creator/"
+cp "./HDiffPatchCreator/bin/Release/net8.0/hdiffz" "./Release-Linux-x64/Patch Creator/"
+cp "./HDiffPatchCreator/bin/Release/net8.0/hpatchz" "./Release-Linux-x64/Patch Creator/"
 
 pause
