@@ -26,7 +26,7 @@ namespace HappyGenyuanImsactUpdate
             var hdiffs = new List<string>();
             var invokes = new List<OuterInvokeInfo>();
 
-            var hdifftxtPath = $"{datadir}\\hdifffiles.txt";
+            var hdifftxtPath = $"{datadir}/hdifffiles.txt";
             if (File.Exists(hdifftxtPath))
             {
                 using (StreamReader hdiffreader = new(hdifftxtPath))
@@ -82,7 +82,7 @@ namespace HappyGenyuanImsactUpdate
         {
             var delete_delays = new List<string>();
 
-            var deletetxtPath = $"{datadir}\\deletefiles.txt";
+            var deletetxtPath = $"{datadir}/deletefiles.txt";
             if (File.Exists(deletetxtPath))
             {
                 using (StreamReader hdiffreader = new(deletetxtPath))
@@ -93,7 +93,7 @@ namespace HappyGenyuanImsactUpdate
                         if (output == null) break;
                         else
                         {
-                            string deletedName = datadir.FullName + '\\' + output;
+                            string deletedName = datadir.FullName + '/' + output;
                             if (File.Exists(deletedName))
                                 File.Delete(deletedName);
                             else delete_delays.Add(deletedName);

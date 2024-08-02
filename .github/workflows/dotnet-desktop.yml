@@ -41,14 +41,14 @@ name: Normal dotnet publish
 
 on:
   push:
-    branches: [ "development-(have-not-been-tested)" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "development-(have-not-been-tested)" ]
+    branches: [ "main" ]
 
 jobs:
 
   build:
-    runs-on: windows-latest  # For a list of available runner types, refer to
+    runs-on: ubuntu-latest   # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     steps:
@@ -66,12 +66,12 @@ jobs:
     # Build
     - name: Create release
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: ./create-release.bat
+      run: ./create-release.sh
 
     # Upload artifact
     - name: Upload release
       uses: actions/upload-artifact@v2
       with:
-        name: Release-windows7-x64
-        path: Release-windows7-x64
-        retention-days: 7
+        name: Release-Linux-x64
+        path: Release-Linux-x64
+        retention-days: 200

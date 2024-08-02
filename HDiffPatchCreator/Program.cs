@@ -1,4 +1,4 @@
-﻿using HappyGenyuanImsactUpdate;
+using HappyGenyuanImsactUpdate;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -12,8 +12,8 @@ namespace HDiffPatchCreator
 {
     internal class Program
     {
-        static string path7z = $"{Helper.exePath}\\7z.exe";
-        static string hdiffzPath = $"{Helper.exePath}\\hdiffz.exe";
+        static string path7z = $"{Helper.exePath}/7zz";
+        static string hdiffzPath = $"{Helper.exePath}/hdiffz";
 
         static async Task Main(string[] args)
         {
@@ -110,11 +110,11 @@ namespace HDiffPatchCreator
                 Usage();
                 Environment.Exit(1);
             }
-            if (!Helper.AnyCertainGameExists(dirFrom))
+            if (!Helper.AnyCertainGameExists(dirFrom.FullName))
             {
                 Log.Warn("<color=Yellow>WARNING</color>: No known game executable under game path. (verFrom)");
             }
-            if (!Helper.AnyCertainGameExists(dirTo))
+            if (!Helper.AnyCertainGameExists(dirTo.FullName))
             {
                 Log.Warn("<color=Yellow>WARNING</color>: No known game executable under game path. (verTo)");
             }
@@ -202,12 +202,12 @@ namespace HDiffPatchCreator
             #endregion
 
             await CreatePatch(list1, list2, dirFrom, dirTo,
-                $"{outputAt}\\{prefix}_{verFrom}_{verTo}_hdiff_{Randomstr(16)}.zip", cmp);
+                $"{outputAt}/{prefix}_{verFrom}_{verTo}_hdiff_{Randomstr(16)}.zip", cmp);
 
             if (createReverse)
             {
                 await CreatePatch(list2, list1, dirTo, dirFrom,
-                    $"{outputAt}\\{prefix}_{verTo}_{verFrom}_hdiff_{Randomstr(16)}.zip", cmp);
+                    $"{outputAt}/{prefix}_{verTo}_{verFrom}_hdiff_{Randomstr(16)}.zip", cmp);
             }
 
             #region Multiple Read Assert
@@ -251,7 +251,7 @@ namespace HDiffPatchCreator
         static async Task CreatePatch(IEnumerable<FileInfo> filesFrom, IEnumerable<FileInfo> filesTo,
             DirectoryInfo dirFrom, DirectoryInfo dirTo, string createpakPath, FileCompare cmp)
         {
-            var tmpFilePath = $"{new FileInfo(createpakPath).DirectoryName}\\Temp-{Randomstr(32)}";
+            var tmpFilePath = $"{new FileInfo(createpakPath).DirectoryName}/Temp-{Randomstr(32)}";
             Directory.CreateDirectory(tmpFilePath);
 
             // Files in From but not in To should be deleted
@@ -262,7 +262,7 @@ namespace HDiffPatchCreator
             {
                 strb.AppendLine(FileCompare.GetRelativePath(file, dirFrom));
             }
-            File.WriteAllText($"{tmpFilePath}\\deletefiles.txt", strb.ToString());
+            File.WriteAllText($"{tmpFilePath}/deletefiles.txt", strb.ToString());
             #endregion
 
             // Files in To but not in From could be directly reserved
@@ -270,7 +270,7 @@ namespace HDiffPatchCreator
             #region Copy
             foreach (var file in toOnly)
             {
-                var newfile = new FileInfo($"{tmpFilePath}\\{FileCompare.GetRelativePath(file, dirTo)}");
+                var newfile = new FileInfo($"{tmpFilePath}/{FileCompare.GetRelativePath(file, dirTo)}");
                 CreateDirectoryFor(newfile);
                 Log.Info($"Copying: {file.FullName} -> {newfile.FullName}", $"{nameof(CreatePatch)}_FileCopy");
                 File.Copy(file.FullName, newfile.FullName);
@@ -285,9 +285,9 @@ namespace HDiffPatchCreator
             {
                 var relativePath = FileCompare.GetRelativePath(file, dirFrom);
 
-                var fromPath = new FileInfo($"{dirFrom}\\{relativePath}");
-                var toPath = new FileInfo($"{dirTo}\\{relativePath}");
-                var diffPath = new FileInfo($"{tmpFilePath}\\{relativePath}.hdiff");
+                var fromPath = new FileInfo($"{dirFrom}/{relativePath}");
+                var toPath = new FileInfo($"{dirTo}/{relativePath}");
+                var diffPath = new FileInfo($"{tmpFilePath}/{relativePath}.hdiff");
 
                 if (cmp.RealEqual(fromPath, toPath))
                 {
@@ -298,7 +298,7 @@ namespace HDiffPatchCreator
                 if (file.Name.EndsWith("pkg_version"))
                 {
                     // pkg_versions shouldn't use hdiff
-                    File.Copy(toPath.FullName, $"{tmpFilePath}\\{relativePath}");
+                    File.Copy(toPath.FullName, $"{tmpFilePath}/{relativePath}");
                     continue;
                 }
 
@@ -309,7 +309,7 @@ namespace HDiffPatchCreator
                         // Fallback to diff
                         Log.Info($"HDiff = {diffPath.Length}, To = {toPath.Length}, fallback to diff", $"{nameof(CreatePatch)}_Hdiff");
                         diffPath.Delete();
-                        File.Copy(toPath.FullName, $"{tmpFilePath}\\{relativePath}");
+                        File.Copy(toPath.FullName, $"{tmpFilePath}/{relativePath}");
                     }
                     else
                     {
@@ -322,29 +322,31 @@ namespace HDiffPatchCreator
                     Log.Warn($"HDiff failed, fallback to diff, file fromVer: {fromPath.FullName}, toVer: {toPath.FullName}", $"{nameof(CreatePatch)}_Hdiff");
                     CreateDirectoryFor(diffPath);
                     Debug.Assert(false);
-                    File.Copy(toPath.FullName, $"{tmpFilePath}\\{relativePath}");
+                    File.Copy(toPath.FullName, $"{tmpFilePath}/{relativePath}");
                 }
             }
 
-            File.WriteAllText($"{tmpFilePath}\\hdifffiles.txt", strb.ToString());
+            File.WriteAllText($"{tmpFilePath}/hdifffiles.txt", strb.ToString());
             #endregion
 
             #region Write README
             string readme =
                 "This is a hdiff update package created by HappuGenyuanImsactUpdate. \n" +
                 "For using, you may download our patcher release here: \n" +
-                "https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/releases\n" +
-                "Then run Updater\\HappyGenyuanImsactUpdate.exe to perform a update.\n" +
+                "Windows: https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/releases\n" +
+                "Linux: https://github.com/nholi/GenyuanUpdateLinux/releases\n" +
+                "Then run Updater/HappyGenyuanImsactUpdate.exe to perform a update.\n" +
                 "\n" +
+                "Feel free to join our Discord server: https://discord.com/invite/bU3ZsTcz2n\n" +
                 "Have a good day! Thanks for using!";
-            File.WriteAllText($"{tmpFilePath}\\README.txt", readme);
+            File.WriteAllText($"{tmpFilePath}/README.txt", readme);
             #endregion
 
             #region Create Compressed File
             await OuterInvoke.Run(new OuterInvokeInfo
             {
                 ProcessPath = path7z,
-                CmdLine = $"a -tzip \"{createpakPath}\" \"{tmpFilePath}\\*\" -mmt",
+                CmdLine = $"a -tzip \"{createpakPath}\" \"{tmpFilePath}/*\" -mmt",
                 StartingNotice = "Compressing output zip archive...",
                 AutoTerminateReason = "Output compressing failed. You may retry by yourself."
             }, 6);

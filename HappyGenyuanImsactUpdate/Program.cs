@@ -1,4 +1,4 @@
-﻿/*******HappyGenyuanImsactUpdate*******/
+/*******HappyGenyuanImsactUpdate*******/
 // A hdiff-using update program of a certain anime game.
 
 using System.Reflection;
@@ -26,8 +26,8 @@ namespace HappyGenyuanImsactUpdate
             //Not working path, but the path where the program located
             Helper.CheckForTools();
 
-            var path7z = $"{Helper.exePath}\\7z.exe";
-            var hpatchzPath = $"{Helper.exePath}\\hpatchz.exe";
+            var path7z = $"{Helper.exePath}/7zz";
+            var hpatchzPath = $"{Helper.exePath}/hpatchz";
 
             #region Variables
             DirectoryInfo? datadir = null;
@@ -160,7 +160,7 @@ namespace HappyGenyuanImsactUpdate
             {
                 FileInfo pkgver = new(pkgversionpath);
                 if (pkgver.Name == "pkg_version") continue;
-                File.Move(pkgversionpath, $"{Helper.tempPath}\\{pkgver.Name}");
+                File.Move(pkgversionpath, $"{Helper.tempPath}/{pkgver.Name}");
             }
 
             // Due to some reasons, if the deleted files are not there,
@@ -195,9 +195,6 @@ namespace HappyGenyuanImsactUpdate
             // It is a proper change because only the newest pkg_version is valid.
             if (!UpdateCheck(datadir, checkAfter))
             {
-                Helper.ShowErrorBalloonTip(5000, "Update failed.",
-                    "Sorry, the update process was exited because files aren't correct.");
-
                 Log.Erro("Sorry, the update process was exited because the original files aren't correct.", nameof(PkgVersionCheck));
                 Log.Erro("Press any key to continue. ", nameof(PkgVersionCheck));
                 Console.Read();
@@ -211,7 +208,7 @@ namespace HappyGenyuanImsactUpdate
                 if (pkgver.Name == "pkg_version") continue;
                 if (pkgver.Exists) continue; // pkg_version Overrided
 
-                var backuppath = $"{Helper.tempPath}\\{pkgver.Name}";
+                var backuppath = $"{Helper.tempPath}/{pkgver.Name}";
                 File.Move(backuppath, pkgversionpath);
                 if (checkAfter == CheckMode.None)
                 {
@@ -238,9 +235,7 @@ namespace HappyGenyuanImsactUpdate
                 if (File.Exists(deletedfile))
                     File.Delete(deletedfile);
 
-            Helper.ShowInformationBalloonTip(5000, "Update process is done!", "Enjoy the new version!");
-
-            DeleteZipFilesReq(zips, ifdeletepackage);
+            //DeleteZipFilesReq(zips, ifdeletepackage);
             Log.Info("-------------------------");
 
             Helper.TryDisposeTempFiles();
@@ -297,9 +292,6 @@ namespace HappyGenyuanImsactUpdate
         public static void ConfigChange(DirectoryInfo datadir, FileInfo zipstart, FileInfo zipend)
         {
             if (!File.Exists($"{datadir}\\config.ini")) return;
-
-            Helper.ShowInformationBalloonTip(5000, "The update program needs you decision.",
-                "You need to apply change to the Launcher config in the console.");
 
             Log.Info("We have noticed that you're probably using an official launcher.", nameof(ConfigChange));
             Log.Info("To make it display the correct version, we would make some change on related file.", nameof(ConfigChange));
@@ -409,24 +401,24 @@ namespace HappyGenyuanImsactUpdate
             }
 
             var pkgversionPaths = UpCheck.GetPkgVersion(datadir);
-            if (!pkgversionPaths.Contains($"{datadir}\\pkg_version"))
+            if (!pkgversionPaths.Contains($"{datadir}/pkg_version"))
             {
                 Log.Warn($"Can't find pkg_version file. No checks are performed.", nameof(PkgVersionCheck));
                 Log.Info($"It's normal if you're attempting to update Honkai: March 7th.", nameof(PkgVersionCheck));
                 return true;
             }
 
-            // ...\??? game\???_Data\StreamingAssets\Audio\GeneratedSoundBanks\Windows
-            string old_audio1 = $@"{datadir.FullName}\{Helper.certaingames[0]}_Data\StreamingAssets\Audio\GeneratedSoundBanks\Windows";
-            string old_audio2 = $@"{datadir.FullName}\{Helper.certaingames[1]}_Data\StreamingAssets\Audio\GeneratedSoundBanks\Windows";
+            // ...\??? game/???_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows
+            string old_audio1 = $@"{datadir.FullName}/{Helper.certaingames[0]}_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows";
+            string old_audio2 = $@"{datadir.FullName}/{Helper.certaingames[1]}_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows";
             string[]? audio_pkgversions = null;
             if (Directory.Exists(old_audio1)) audio_pkgversions = Directory.GetDirectories(old_audio1);
             else if (Directory.Exists(old_audio2)) audio_pkgversions = Directory.GetDirectories(old_audio2);
             else // ver >= 3.6
             {
-                // ...\??? game\???_Data\StreamingAssets\AudioAssets
-                string new_audio1 = $@"{datadir.FullName}\{Helper.certaingames[0]}_Data\StreamingAssets\AudioAssets";
-                string new_audio2 = $@"{datadir.FullName}\{Helper.certaingames[1]}_Data\StreamingAssets\Audio\AudioAssets";
+                // .../??? game/???_Data/StreamingAssets/AudioAssets
+                string new_audio1 = $@"{datadir.FullName}/{Helper.certaingames[0]}_Data/StreamingAssets/AudioAssets";
+                string new_audio2 = $@"{datadir.FullName}/{Helper.certaingames[1]}_Data/StreamingAssets/Audio/AudioAssets";
 
                 if (Directory.Exists(new_audio1)) audio_pkgversions = Directory.GetDirectories(new_audio1);
                 else if (Directory.Exists(new_audio2)) audio_pkgversions = Directory.GetDirectories(new_audio2);
@@ -436,7 +428,7 @@ namespace HappyGenyuanImsactUpdate
             foreach (string audiopath in audio_pkgversions)
             {
                 string audioname = new DirectoryInfo(audiopath).Name;
-                if (!pkgversionPaths.Contains($"{datadir}\\Audio_{audioname}_pkg_version"))
+                if (!pkgversionPaths.Contains($"{datadir}/Audio_{audioname}_pkg_version"))
                 {
                     // ver <= 1.4
                     Log.Warn($"Not checking Audio: {audioname} for Audio_{audioname}_pkg_version does not exist.", nameof(PkgVersionCheck));
@@ -462,7 +454,7 @@ namespace HappyGenyuanImsactUpdate
             }
 
             DirectoryInfo datadir = new(dataPath);
-            if (!Helper.AnyCertainGameExists(datadir))
+            if (!Helper.AnyCertainGameExists(dataPath))
             {
                 Log.Warn("No known game executable found under directory. Do you believe the path is correct? Type 'y' to confirm.", nameof(GetDataPath));
                 if (Console.ReadLine()?.ToLower() == "y") return datadir;
@@ -485,14 +477,7 @@ namespace HappyGenyuanImsactUpdate
 
             FileInfo zipfile = new(pakPath);
 
-            // Fuck why I have tested this
-            if (pakPath.Length >= 3)
-                if (pakPath.Substring(1, 2) != ":\\")
-                {
-                    //Support relative path
-                    pakPath = $"{gamePath}\\{pakPath}";
-                    zipfile = new(pakPath);
-                }
+            //Fuck relative path support
 
             //To protect fools who really just paste its name
             if (zipfile.Extension != ".zip"

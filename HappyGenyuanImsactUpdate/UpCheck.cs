@@ -23,7 +23,7 @@ namespace HappyGenyuanImsactUpdate
         {
             List<string> rtns = new();
 
-            string originVersionPath = $"{datadir.FullName}\\pkg_version";
+            string originVersionPath = $"{datadir.FullName}/pkg_version";
             if (File.Exists(originVersionPath)) rtns.Add(originVersionPath);
             foreach (var file in datadir.GetFiles())
             {
@@ -77,7 +77,7 @@ namespace HappyGenyuanImsactUpdate
                          *      "fileSize": 1919810
                          * }
                          */
-                        string checkName = datadir.FullName + '\\'
+                        string checkName = datadir.FullName + '/'
                             + doce.GetProperty("remoteName").GetString();
                         //command:  -f (original file) (patch file)   (output file)
                         //  hpatchz -f name.pck        name.pck.hdiff name.pck

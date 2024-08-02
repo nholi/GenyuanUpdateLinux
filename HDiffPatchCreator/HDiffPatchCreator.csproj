@@ -5,10 +5,9 @@
     <TargetFramework>net6.0-windows7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <Version>3.2.4</Version>
-    <Authors>YYHEggEgg</Authors>
-    <Copyright>Copyright (c) 2024 YYHEggEgg</Copyright>
+    <Authors>YYHEggEgg, Nholi</Authors>
+    <Copyright>Copyright (c) 2024 Nholi</Copyright>
     <ValidateExecutableReferencesMatchSelfContained>false</ValidateExecutableReferencesMatchSelfContained>
   </PropertyGroup>
 

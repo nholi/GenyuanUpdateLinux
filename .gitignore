@@ -1,5 +1,4 @@
 /.vs
-/Release-windows10-x64
 /HappyGenyuanImsactUpdate/bin
 /HappyGenyuanImsactUpdate/obj
 /HappyGenyuanImsactUpdate/Properties
@@ -7,11 +6,8 @@
 /HDiffPatchCreator/obj
 /HDiffPatchCreator/Properties
 /.vscode
-/Release-windows7-x64
-/Updater-windows7-x64-packed-runtime
-/Release-windows7-x64.zip
-/Updater-windows7-x64-packed-runtime.zip
-/Release-windows7-x86
-/Updater-windows7-x86-packed-runtime
-/Release-windows7-x86.zip
-/Updater-windows7-x86-packed-runtime.zip
+/Release-Linux-x64
+/Release-Linux-x64.zip
+/Release-Linux-x86
+/Release-Linux-x86.zip
+/.idea

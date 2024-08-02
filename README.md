@@ -1,7 +1,7 @@
-[中文](https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/blob/main/README_CN.md) | EN
+[中文](https://github.com/nholi/GenyuanUpdateLinux/blob/main/README_CN.md) | EN
 
-# HappyGenyuanImsactUpdate
-A hdiff-using update program of a certain anime game.
+# GenyuanUpdate
+A hdiff-using update program for GenyuanImsact now on Linux! 
 
 ## Available Package Download
 You can turn to this repository to download files from `the anime game company`: 

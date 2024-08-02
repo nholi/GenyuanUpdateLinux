@@ -1,4 +1,4 @@
-中文 | [EN](https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/blob/main/README.md)
+中文 | [EN](https://github.com/nholi/GenyuanUpdateLinux/blob/main/README.md)
 
 # HappyGenyuanImsactUpdate
 A hdiff-using update program of a certain anime game.   
@@ -72,21 +72,18 @@ A hdiff-using update program of a certain anime game.
 ## 如何找到游戏目录文件夹    
 1. 打开米哈游启动器   
 2. 点击“开始游戏”或“更新游戏”旁的菜单  
-![Launcher UI](https://raw.githubusercontent.com/YYHEggEgg/HappyGenyuanImsactUpdate/main/Tutorial%20Images/rel_v3.2.4%2B/cn_img01.png)
-
 3. 点击“游戏设置”选项
 4. 找到启动器显示的文件夹 (**注意：图片仅供参考，目录在您自己的电脑上与图片中不同！**)
 
 5. 您也可以点击下方的“打开所在目录”按钮，直接点击地址栏并复制目录。如果您已从官方启动器预下载了更新文件，可以在内看到 `chunk` 文件夹。**本更新程序不适用于此种更新模式，请另行下载 hdiff 更新包。** 有关信息参见 [可用包体下载](#可用包体下载).  
 
-![Installation Location](https://raw.githubusercontent.com/YYHEggEgg/HappyGenyuanImsactUpdate/main/Tutorial%20Images/rel_v3.2.4%2B/cn_img02.png)
 ## 如何使用
 ### 补丁工具使用 / Updater
 你需要以下文件:
 
 - 游戏文件
 - 一个或多个zip更新包
-- 在 [release](https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/releases) 下载的本程序最新发行版
+- 在 [release](https://github.com/nholi/GenyuanUpdateLinux/releases) 下载的本程序最新发行版
 
 您可以参考这里的指示使用程序。     
 首先，您需要将游戏目录（目录下有 Yuansact.exe 或 GenyuanImsact.exe）输入程序，         
@@ -108,7 +105,7 @@ Enjoy it!
 你需要以下文件：
 
 - **从官方下载的**两个版本的**已解压游戏文件**
-- 在 [release](https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/releases) 下载的本程序最新发行版
+- 在 [release](https://github.com/nholi/GenyuanUpdateLinux/releases) 下载的本程序最新发行版
 
 您可以参考这里的命令行使用指南。     
 ```

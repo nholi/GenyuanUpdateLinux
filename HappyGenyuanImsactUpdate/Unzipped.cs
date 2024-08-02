@@ -29,11 +29,11 @@
         {
             foreach (var file in Directory.GetFiles(source))
             {
-                File.Move(file, $"{target}\\{new FileInfo(file).Name}", true);
+                File.Move(file, $"{target}/{new FileInfo(file).Name}", true);
             }
             foreach (var dir in Directory.GetDirectories(source))
             {
-                string newdir = $"{target}\\{new DirectoryInfo(dir).Name}";
+                string newdir = $"{target}/{new DirectoryInfo(dir).Name}";
                 Directory.CreateDirectory(newdir);
                 MoveDir(dir, newdir);
             }
