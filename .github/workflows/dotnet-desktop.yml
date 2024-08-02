@@ -66,7 +66,7 @@ jobs:
     # Build
     - name: Create release
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: ./create-release.sh
+      run: chmod +x create-release.sh && ./create-release.sh
 
     # Upload artifact
     - name: Upload release
