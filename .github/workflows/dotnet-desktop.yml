@@ -53,13 +53,13 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6.0.2
       with:
         fetch-depth: 0
 
     # Install the .NET Core workload
     - name: Install .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v5.2
       with:
         dotnet-version: 8.0.x
 
@@ -69,7 +69,7 @@ jobs:
 
     # Upload artifact
     - name: Upload release
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v7
       with:
         name: Release-Linux-x64
         path: Release-Linux-x64
