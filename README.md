@@ -1,74 +1,18 @@
-[中文](https://github.com/nholi/GenyuanUpdateLinux/blob/main/README_CN.md) | EN
-
 # GenyuanUpdate
-A hdiff-using update program for GenyuanImsact now on Linux! 
-
-## Available Package Download
-You can turn to this repository to download files from `the anime game company`: 
-
-- [Anime Game Downloads Archive](https://git.xeondev.com/YYHEggEgg/GI-Download-Library)
-- [Honkai: March 7th Downloads Archive](https://github.com/keitarogg/HSR-Download-Library)
-- [3Z Downloads Archive](https://github.com/360NENZ/ZZZ-Download-Library)
+A hdiff-using update program for GenyuanImsact, now on Linux! 
 
 ## Annoucements
-### License Change Notice
-As of Aug 30, 2023, this project has been re-licensed under the MIT License. All previous and future contributions are subject to this new license.
 
-### [Don't use this for ->3.6 Update](https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/issues/15)
+### Don't use this for ->3.6 Update
 From 3.6, miHoYo changed `StreamingAssets/Audio/GeneratedSoundBanks/Windows` to `StreamingAssets/AudioAssets`, but the launcher is responsible for the modification, not the update package.  
 
 This won't be fixed as I don't want to pollute the code any more. 
-
-This is most probably a temporaily a corner case and **this Updater program is still avaliable in >=3.7 versions**. For more information, go to [this issue](https://github.com/YYHEggEgg/HappyGenyuanImsactUpdate/issues/15).
 
 ### Explanation of Limited Support
 
 Since version 4.6, HoYoPlay has gradually adopted `sophon chunk` as its primary update distribution and installation mode.
 
 This program only adapts to hdiff update packages, so it will not add support for the corresponding feature. However, this software will still receive basic bug fixes and optimization updates (if necessary).
-
-## New feature
-
-### v3.2.4
-- When using the `Updater`, if the executable file of the game (that can be recognized by program) does not exist in the directory, users are allowed to manually confirm to continue.
-
-### v3.2.3
-
-- Due to the fact that the provided `7z.exe`, `hpatchz.exe` and `hdiffz.exe` are all 64-bit programs, the support plan for 32-bit Windows has been cancelled.
-
-#### Patch Creator
-
-- The `--only-include-pkg-defined-files` and `--include-audios` option have been supported. For more information, please refer to [Usage - How to create a patch / Patch Creator](#how-to-create-a-patch--patch-creater).
-
-### v3.2.2
-#### Updater
-- Fixed the issue where the Updater won't work with `Honkai: March 7th`.
-- The software is now packed with dotnet runtime (6.0), allowing user not to install runtime.
-- Release version supported Windows x86.
-- Supported balloon tip notice on Windows 7 and newer (notifications instead on >= Windows 10).
-
-### v3.2.1
-#### Updater
-- Fixed the issue where the Updater won't work with anime game version <= `1.5`.
-- Fixed an issue with Audio packages where the Updater won't detect them in anime game version >= `3.6`.
-- Supported packages from `Honkai: March 7th`.
-
-#### Patch Creator
-Now, when the Patch Creator detected that the given two directories have files with the same names, it will request the user for review and confirmation.
-
-### v3.2.0
-- Migrated the entire project to `EggEgg.CSharp-Logger v3.0.0`.
-  Now, whether updating or creating update packages, the logs will be kept in the program directory, but the debug logs will not be displayed on the console and will be output to `latest.debug.log`.
-- During updates, hdiff patch failure is supported for automatic retries (3 times).
-- A warning will be triggered if the program is run without extracting it.
-
-### v3.0.0
-Now you can create hdiff patch packages on your own, like `the anime game company`!   
-Just invoke `Patch Creater\HDiffPatchCreator.exe` in command line.
-
-Notice: It's highly recommended to **use original packages from the anime game company only** to create patches.
-
-Files from your own computer will probably contains live updates and caches, which some users don't have. **Putting caches into the package will be likely to make your personal information got leaked.** For more information, see [Available Package Download](#available-package-download).
 
 ## Usage
 ### How to use the patcher / Updater
